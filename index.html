@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Arisha">
+  <title>Magic Eight Ball</title>
+
+  <!-- Link to external CSS (same folder as HTML) -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Magic Eight Ball</h1>
+    <p>Ask the magic eight ball a yes/no question, and it will provide an answer!</p>
+
+    <!-- Form to input the question -->
+    <div id="questionForm">
+      <label for="questionInput">Enter your question:</label>
+      <input type="text" id="questionInput" placeholder="Ask a question..." required>
+      <button onclick="askQuestion()">Ask</button>
+    </div>
+
+    <!-- Area for displaying the answer -->
+    <div id="answerArea">
+      <p id="answer"></p>
+    </div>
+
+    <!-- Prompt to ask another question -->
+    <div id="askAgain">
+      <button onclick="askAnother()">Ask Again</button>
+      <button onclick="farewell()">Stop</button>
+    </div>
+
+    <p id="farewellMessage"></p>
+  </div>
+
+  <script>
+    const answers = [
+      "Yes", 
+      "No", 
+      "Definitely", 
+      "Ask again later", 
+      "Not likely", 
+      "Certainly", 
+      "Impossible", 
+      "Absolutely"
+    ];
+
+    // Function to handle the question ask
+    function askQuestion() {
+      const questionInput = document.getElementById('questionInput').value;
+      if (questionInput.trim() === '') {
+        alert('Please enter a valid question!');
+        return;
+      }
+
+      // Randomly select an answer from the array
+      const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
+      
+      // Display the answer
+      document.getElementById('answer').textContent = randomAnswer;
+
+      // Show the option to ask again or stop
+      document.getElementById('askAgain').style.display = 'block';
+    }
+
+    // Function to allow the user to ask another question
+    function askAnother() {
+      document.getElementById('questionInput').value = '';
+      document.getElementById('answer').textContent = '';
+      document.getElementById('askAgain').style.display = 'none';
+    }
+
+    // Function to display a farewell message
+    function farewell() {
+      document.getElementById('answerArea').style.display = 'none';
+      document.getElementById('askAgain').style.display = 'none';
+      document.getElementById('farewellMessage').textContent = "Thanks for playing! Goodbye!";
+    }
+  </script>
+</body>
+
+</html>
 
